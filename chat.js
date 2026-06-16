@@ -94,6 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('lulu_chats', JSON.stringify(chats));
     }
 
+    // Modal Logic
+    const modalOverlay = document.getElementById('confirm-modal');
+    const btnCancelDelete = document.getElementById('btn-cancel-delete');
+    const btnConfirmDelete = document.getElementById('btn-confirm-delete');
+    let chatToDeleteId = null;
+
+    if (btnCancelDelete && btnConfirmDelete) {
+        btnCancelDelete.addEventListener('click', () => {
+            modalOverlay.classList.add('hidden');
+            chatToDeleteId = null;
+        });
+
+        btnConfirmDelete.addEventListener('click', () => {
+            if (chatToDeleteId) {
+                delete chats[chatToDeleteId];
+                saveChats();
+                if (chatToDeleteId === currentChatId) {
+                    const remaining = Object.keys(chats).sort((a,b) => b - a);
+                    if (remaining.length > 0) loadChat(remaining[0]);
+                    else createNewChat();
+                } else {
+                    renderSidebar();
+                }
+                modalOverlay.classList.add('hidden');
+                chatToDeleteId = null;
+            }
+        });
+    }
+
     function renderSidebar() {
         chatList.innerHTML = '';
         const sortedIds = Object.keys(chats).sort((a, b) => b - a);
@@ -115,17 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>';
             deleteBtn.onclick = (e) => {
                 e.stopPropagation();
-                if (confirm('Tem certeza que deseja excluir permanentemente esta conversa?')) {
-                    delete chats[id];
-                    saveChats();
-                    if (id === currentChatId) {
-                        const remaining = Object.keys(chats).sort((a,b) => b - a);
-                        if (remaining.length > 0) loadChat(remaining[0]);
-                        else createNewChat();
-                    } else {
-                        renderSidebar();
-                    }
-                }
+                chatToDeleteId = id;
+                modalOverlay.classList.remove('hidden');
             };
 
             wrapper.appendChild(btn);
