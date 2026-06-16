@@ -12,6 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNewChat = document.getElementById('btn-new-chat');
     const chatList = document.getElementById('chat-list');
 
+    const btnTheme = document.getElementById('theme-toggle');
+
+    // Theme Management
+    const currentTheme = localStorage.getItem('lulu_theme') || 'dark';
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
+    if (btnTheme) {
+        btnTheme.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('lulu_theme', newTheme);
+        });
+    }
+
     // State
     let currentChatId = null;
     let chats = JSON.parse(localStorage.getItem('lulu_chats')) || {};
@@ -112,7 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bubble = document.createElement('div');
         bubble.className = 'bubble';
-        bubble.textContent = text || '';
+        
+        if (sender === 'bot' && typeof marked !== 'undefined') {
+            bubble.innerHTML = marked.parse(text || '');
+        } else {
+            bubble.textContent = text || '';
+        }
 
         // Add attachments visually
         if (files && files.length > 0) {

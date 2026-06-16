@@ -1,4 +1,20 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    const btnTheme = document.getElementById('theme-toggle');
+
+    // Theme Management
+    const currentTheme = localStorage.getItem('lulu_theme') || 'dark';
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
+    if (btnTheme) {
+        btnTheme.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('lulu_theme', newTheme);
+        });
+    }
+
     const questionInput = document.getElementById('question-input');
     const exampleBtns = document.querySelectorAll('.example-btn');
     const btnAsk = document.getElementById('btn-ask');
