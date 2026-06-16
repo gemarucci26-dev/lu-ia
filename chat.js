@@ -100,11 +100,37 @@ document.addEventListener('DOMContentLoaded', () => {
         
         sortedIds.forEach(id => {
             const chat = chats[id];
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = `chat-item-wrapper ${id === currentChatId ? 'active' : ''}`;
+
             const btn = document.createElement('button');
-            btn.className = `chat-item ${id === currentChatId ? 'active' : ''}`;
+            btn.className = 'chat-item';
             btn.textContent = chat.title;
             btn.onclick = () => loadChat(id);
-            chatList.appendChild(btn);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn-delete-chat';
+            deleteBtn.title = 'Excluir Conversa';
+            deleteBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>';
+            deleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                if (confirm('Tem certeza que deseja excluir permanentemente esta conversa?')) {
+                    delete chats[id];
+                    saveChats();
+                    if (id === currentChatId) {
+                        const remaining = Object.keys(chats).sort((a,b) => b - a);
+                        if (remaining.length > 0) loadChat(remaining[0]);
+                        else createNewChat();
+                    } else {
+                        renderSidebar();
+                    }
+                }
+            };
+
+            wrapper.appendChild(btn);
+            wrapper.appendChild(deleteBtn);
+            chatList.appendChild(wrapper);
         });
     }
 
@@ -332,7 +358,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners for UI
     btnToggleSidebar.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
+        if (window.innerWidth <= 768) {
+            sidebar.classList.toggle('open');
+        } else {
+            sidebar.classList.toggle('collapsed');
+        }
     });
 
     btnNewChat.addEventListener('click', createNewChat);

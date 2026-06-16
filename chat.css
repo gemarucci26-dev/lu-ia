@@ -19,9 +19,13 @@ html, body {
     background-color: var(--accent); /* Changes with theme */
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, background-color 0.4s ease;
+    transition: margin-left 0.3s ease, left 0.3s ease, background-color 0.4s ease;
     border-right: 1px solid var(--border-color);
     z-index: 100;
+}
+
+.sidebar.collapsed {
+    margin-left: -280px;
 }
 
 .sidebar-header {
@@ -61,9 +65,27 @@ html, body {
     gap: 0.5rem;
 }
 
-.chat-item {
-    padding: 0.85rem 1rem;
+.chat-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-radius: 8px;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.chat-item-wrapper:hover {
+    background-color: var(--border-color);
+}
+
+.chat-item-wrapper.active {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.chat-item {
+    flex: 1;
+    padding: 0.85rem 1rem;
     color: var(--text-secondary);
     cursor: pointer;
     text-overflow: ellipsis;
@@ -73,19 +95,46 @@ html, body {
     border: none;
     background: transparent;
     text-align: left;
-    transition: all 0.2s;
     font-family: var(--font-family);
+    transition: color 0.2s;
 }
 
-.chat-item:hover {
-    background-color: var(--border-color);
+.chat-item-wrapper:hover .chat-item {
     color: var(--text-primary);
 }
 
-.chat-item.active {
-    background-color: var(--primary-color);
+.chat-item-wrapper.active .chat-item {
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.btn-delete-chat {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    margin-right: 0.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    opacity: 0; /* hidden by default */
+}
+
+.chat-item-wrapper:hover .btn-delete-chat {
+    opacity: 1;
+}
+
+.chat-item-wrapper.active .btn-delete-chat {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
+}
+
+.btn-delete-chat:hover {
+    color: #ff4444 !important;
+    filter: drop-shadow(0 0 4px rgba(255, 68, 68, 0.6));
+    transform: scale(1.1);
 }
 
 .sidebar-footer {
@@ -293,6 +342,7 @@ body.light-mode .bubble code { background: rgba(0,0,0,0.05); }
 .message-audio { margin-top: 0.5rem; height: 40px; border-radius: 20px; }
 
 @media (max-width: 768px) {
-    .sidebar { position: absolute; left: -280px; height: 100%; }
+    .sidebar { position: absolute; left: -280px; height: 100%; margin-left: 0; }
     .sidebar.open { left: 0; box-shadow: 4px 0 24px rgba(0,0,0,0.2); }
+    .sidebar.collapsed { margin-left: 0; }
 }
