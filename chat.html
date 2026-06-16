@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LuIA - Chat">
-    <title>LuIA | Chat</title>
+    <meta name="description" content="Lulu-IA - Chat">
+    <title>Lulu-IA | Chat</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,26 +12,59 @@
     <link rel="stylesheet" href="chat.css">
 </head>
 <body>
-    <nav class="navbar" style="justify-content: space-between;">
-        <a href="index.html" class="back-link">← Voltar</a>
-        <div class="logo">LuIA</div>
-        <div style="width: 60px;"></div> <!-- Spacer for centering logo -->
-    </nav>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button id="btn-new-chat" class="btn-new-chat">+ Novo Chat</button>
+            </div>
+            <div class="chat-list" id="chat-list">
+                <!-- Chat history items will be injected here -->
+            </div>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-link">← Voltar ao Início</a>
+            </div>
+        </aside>
 
-    <div class="chat-container" id="chat-container">
-        <!-- Messages will be injected here -->
-    </div>
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <nav class="chat-header">
+                <button class="btn-toggle-sidebar" id="btn-toggle-sidebar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <div class="logo">Lulu-IA</div>
+                <div style="width: 24px;"></div> <!-- Spacer -->
+            </nav>
 
-    <div class="chat-input-area">
-        <div class="chat-input-wrapper">
-            <input type="text" id="chat-input" placeholder="Faça outra pergunta..." autocomplete="off">
-            <button class="btn-send" id="btn-send">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-            </button>
-        </div>
+            <div class="chat-container" id="chat-container">
+                <!-- Messages will be injected here -->
+            </div>
+
+            <div class="chat-input-area">
+                <div class="file-preview-area" id="file-preview-area"></div>
+                <div class="chat-input-wrapper">
+                    <!-- File Input Hidden -->
+                    <input type="file" id="file-input" style="display: none;" accept="image/*,audio/*,.pdf,.txt,.csv">
+                    
+                    <button class="btn-icon" id="btn-attach" title="Anexar arquivo/imagem">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                    </button>
+                    
+                    <input type="text" id="chat-input" placeholder="Faça uma pergunta ou envie um arquivo..." autocomplete="off">
+                    
+                    <button class="btn-icon" id="btn-mic" title="Gravar Áudio">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </button>
+                    
+                    <button class="btn-send" id="btn-send">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script src="chat.js"></script>

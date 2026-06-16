@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const questionInput = document.getElementById('question-input');
     const exampleBtns = document.querySelectorAll('.example-btn');
     const btnAsk = document.getElementById('btn-ask');

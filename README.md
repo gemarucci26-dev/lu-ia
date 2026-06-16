@@ -1,4 +1,4 @@
-# LuIA 🖤
+﻿# Lulu-IA 🖤
 
 Uma assistente de inteligência artificial minimalista e exclusiva.
 
@@ -8,7 +8,7 @@ Uma assistente de inteligência artificial minimalista e exclusiva.
 
 ## 🌟 Sobre o Projeto
 
-A **LuIA** é uma interface de pesquisa inteligente construída do zero para ser rápida, direta e visualmente elegante. Em vez de uma interface cheia de botões e distrações, a LuIA foca apenas no que importa: a dúvida do usuário e a resposta organizada da IA.
+A **Lulu-IA** é uma interface de pesquisa inteligente construída do zero para ser rápida, direta e visualmente elegante. Em vez de uma interface cheia de botões e distrações, a Lulu-IA foca apenas no que importa: a dúvida do usuário e a resposta organizada da IA.
 
 O projeto utiliza a inteligência da API do **Google Gemini** rodando de forma segura através do Back-end da Vercel.
 

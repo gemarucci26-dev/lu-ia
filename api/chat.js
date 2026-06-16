@@ -3,10 +3,10 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { query } = req.body;
+    const { query, files = [], history = [] } = req.body;
     
-    if (!query) {
-        return res.status(400).json({ error: 'Query is required' });
+    if (!query && files.length === 0) {
+        return res.status(400).json({ error: 'Query or file is required' });
     }
 
     const API_KEY = process.env.GEMINI_API_KEY;
@@ -16,13 +16,32 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Prepare the payload for Gemini API
+        // Build the current message parts
+        const currentParts = [];
+        if (query) {
+            currentParts.push({ text: query });
+        }
+        
+        files.forEach(f => {
+            currentParts.push({
+                inlineData: {
+                    mimeType: f.mimeType,
+                    data: f.base64
+                }
+            });
+        });
+
+        // Assemble all contents (History + Current Message)
+        const contents = [...history, { role: 'user', parts: currentParts }];
+
+        // Prepare the payload for Gemini API v1beta
         const payload = {
-            contents: [{
-                parts: [{ text: `Você é LuIA, uma assistente e pesquisadora virtual minimalista, inteligente e direta. Responda à seguinte pergunta de forma clara, organizada e em linguagem simples, sem se alongar muito, mantendo o tom profissional e direto: ${query}` }]
-            }],
+            systemInstruction: {
+                parts: [{ text: "Você é a Lulu-IA, uma assistente pessoal e pesquisadora inteligente, exclusiva da namorada do criador. Você deve ser muito educada, direta, romântica às vezes, mas focada em ajudar com dúvidas e pesquisas de forma simples." }]
+            },
+            contents: contents,
             generationConfig: {
-                maxOutputTokens: 500,
+                maxOutputTokens: 800,
                 temperature: 0.7,
             }
         };
