@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LuIA - Sua pesquisadora virtual minimalista. Pergunte qualquer coisa. LuIA pesquisa, organiza e explica.">
+    <title>LuIA | Sua pesquisadora inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">LuIA</div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1>Sua pesquisadora inteligente.</h1>
+            <p>Pergunte qualquer coisa.<br>Receba respostas claras, rápidas e organizadas.</p>
+            <a href="#ask" class="btn-primary">Fazer uma pergunta</a>
+        </section>
+
+        <!-- Ask Section (Central Box) -->
+        <section class="ask-section" id="ask">
+            <h2>O que você quer descobrir hoje?</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="question-input" placeholder="Como funciona energia nuclear?" autocomplete="off">
+                    <button class="btn-ask" id="btn-ask">Perguntar à LuIA</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="step">
+                <div class="step-number">1. Pergunte</div>
+                <p>Escreva qualquer dúvida.</p>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2. LuIA pesquisa</div>
+                <p>Analisa informações e organiza a resposta.</p>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3. Entenda</div>
+                <p>Receba explicações simples.</p>
+            </div>
+        </section>
+
+        <!-- Examples Section -->
+        <section class="examples" id="examples">
+            <h3>Exemplos</h3>
+            <div class="examples-grid">
+                <button class="example-btn">Como começar em programação?</button>
+                <button class="example-btn">Como declarar imposto?</button>
+                <button class="example-btn">Qual notebook comprar?</button>
+                <button class="example-btn">Explique blockchain.</button>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits" id="benefits">
+            <ul class="benefits-list">
+                <li><span class="check">✓</span> Respostas rápidas</li>
+                <li><span class="check">✓</span> Linguagem simples</li>
+                <li><span class="check">✓</span> Pesquisa inteligente</li>
+                <li><span class="check">✓</span> Interface minimalista</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">LuIA © 2026</div>
+            <div class="footer-tagline">Pesquise. Entenda. Evolua.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
