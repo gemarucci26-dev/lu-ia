@@ -37,11 +37,11 @@ export default async function handler(req, res) {
         // Prepare the payload for Gemini API v1beta
         const payload = {
             systemInstruction: {
-                parts: [{ text: "Você é a Lulu-IA, uma assistente pessoal e pesquisadora inteligente, exclusiva da namorada do criador. Você deve ser muito educada, direta, romântica às vezes, mas focada em ajudar com dúvidas e pesquisas de forma simples." }]
+                parts: [{ text: "Você é a Lulu-IA, uma assistente pessoal e pesquisadora inteligente, exclusiva da namorada do criador. Seja educada, direta e amável nos cumprimentos, mas VOCÊ DEVE OBRIGATORIAMENTE RESPONDER A PERGUNTA PRINCIPAL DE FORMA COMPLETA E DETALHADA. Não pare de falar antes de explicar tudo o que foi perguntado." }]
             },
             contents: contents,
             generationConfig: {
-                maxOutputTokens: 800,
+                maxOutputTokens: 2048,
                 temperature: 0.7,
             }
         };

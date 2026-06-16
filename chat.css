@@ -96,6 +96,24 @@ html, body {
     align-items: center;
 }
 
+.back-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.back-link:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
 /* Main Chat Area */
 .chat-main {
     flex: 1;
@@ -112,10 +130,10 @@ html, body {
     align-items: center;
     padding: 1rem 2rem;
     border-bottom: 1px solid var(--border-color);
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-color);
     z-index: 10;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .btn-toggle-sidebar {
